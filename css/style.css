@@ -19,14 +19,17 @@
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
-  --primary: #FFC600;
-  --secondary: #23A036;
+  /* Cyberpunk-inspired palette (soft & readable) */
+  --primary: #00E5FF; /* neon cyan */
+  --secondary: #FF4DD2; /* neon magenta */
+  --accent: #7A5CFF; /* violet accent */
   --success: #28a745;
   --info: #17a2b8;
   --warning: #ffc107;
   --danger: #dc3545;
-  --light: #F5F5F5;
-  --dark: #0a1026;
+  --light: #0f1724; /* subtle panel */
+  --muted: #9AA7BF;
+  --dark: #071026; /* deep navy */
   --breakpoint-xs: 0;
   --breakpoint-sm: 576px;
   --breakpoint-md: 768px;
@@ -194,6 +197,95 @@ figure {
 img {
   vertical-align: middle;
   border-style: none;
+}
+
+/* Base theme overrides for cohesive cyberpunk identity */
+body {
+  background: radial-gradient(ellipse at 10% 10%, rgba(122,92,255,0.06), transparent 10%), linear-gradient(180deg,#071026 0%, #081122 50%, #0b1224 100%);
+  color: #cfe7ff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions, but respect reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    transition: background-color 220ms ease, color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+  .btn, .navbar a, .service-carousel .d-flex { transition: transform .28s cubic-bezier(.2,.8,.2,1), box-shadow .28s; }
+}
+
+/* Navbar: translucent, blurred */
+.navbar {
+  background: rgba(5,10,20,0.55) !important;
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(122,92,255,0.08);
+}
+.navbar a { color: var(--muted); }
+.navbar a:hover, .navbar a:focus { color: var(--primary); }
+
+/* Brand */
+.navbar-brand h1 { color: var(--primary); letter-spacing: 1px; font-weight:800; }
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(90deg,var(--primary), var(--accent));
+  border: none;
+  color: #041025;
+  box-shadow: 0 6px 18px rgba(0,229,255,0.09), inset 0 -2px 6px rgba(0,0,0,0.12);
+}
+.btn-primary:hover, .btn-primary:focus { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,229,255,0.12); }
+
+/* Cards & panels - subtle glass effect */
+.bg-white, .service-carousel .d-flex.bg-white, .portfolio-item, .testimonial-carousel .d-flex { 
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 22px rgba(3,6,16,0.6);
+}
+
+/* Carousel captions */
+.carousel-caption { 
+  background: linear-gradient(180deg, rgba(2,8,20,0.5), rgba(2,8,20,0.2));
+  padding: 2rem; border-radius: 8px;
+  transform: translateY(6px);
+}
+.carousel-item img { filter: saturate(1.05) contrast(1.02); }
+
+/* Service carousel hover */
+.service-carousel .d-flex:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 20px 40px rgba(10,18,36,0.6); }
+
+/* Headings */
+h1, h2, h3, h4 { color: #e6f7ff; text-shadow: 0 1px 0 rgba(0,0,0,0.25); }
+
+/* Links and accents */
+a { color: var(--primary); }
+a:hover { color: var(--secondary); }
+
+/* Subtle floating animation for hero elements */
+@keyframes floaty {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0); }
+}
+.carousel-caption > .p-5 { animation: floaty 6s ease-in-out infinite; }
+
+/* Improve readability on text blocks */
+.text-muted { color: var(--muted) !important; }
+.section-title { color: #eaf9ff; }
+
+/* Focus styles */
+a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid rgba(0,229,255,0.14); outline-offset: 2px; }
+
+/* Image presentation */
+img { border-radius: 6px; object-fit: cover; }
+
+/* Utility: subtle divider */
+.divider { height:1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.04), transparent); margin: 1.5rem 0; }
+
+/* Respect reduced motion: disable floats */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-caption > .p-5 { animation: none; }
+  * { transition: none !important; }
 }
 
 svg {
