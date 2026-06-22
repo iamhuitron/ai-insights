@@ -1,1 +1,1 @@
-2026-2-info-2-proyecto-web
+Interactive educational website exploring Artificial Intelligence, machine learning, applications, and emerging technologies.
